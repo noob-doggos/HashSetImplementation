@@ -14,45 +14,133 @@ public class MyHashSet
     }
 
     // Adds the given element to this set
+    // By: Victor
     public void add(int value)
     {
-        // TO DO
+        int hashcode = hashFunction(value);
+
+        if (elementData[hashcode] == null)
+        {
+            elementData[hashcode] = new HashEntry(value);
+            size++;
+        }
+        else
+        {
+            HashEntry cur = elementData[hashcode];
+            while (cur != null)
+            {
+                if (cur.data == value) return;
+                if (cur.next == null)
+                {
+                    cur.next = new HashEntry(value);
+                    size++;
+                    return;
+                }
+                cur = cur.next;
+            }
+        }
+        
+        if (loadFactor() >= MAX_LOAD_FACTOR)
+        {
+            rehash();
+        }
     }
 
     // Removes all elements from the set.
+    // By: Victor
     public void clear()
     {
-        // TO DO
+        elementData = new HashEntry[10];
+        size = 0;
     }
 
     // Returns true if the given value is found in this set.
+    // By: Victor
     public boolean contains(int value)
     {
-        // TO DO
+        HashEntry cur = elementData[hashFunction(value)];
+
+        while (cur != null)
+        {
+            if (cur.data == value)
+            {
+                return true;
+            }
+            cur = cur.next;
+        }
         return false;
     }
 
     // Returns true if there are no elements in this queue.
+    // by: Clyde
     public boolean isEmpty()
     {
-        // TO DO
+        // TODO: return if size variable is equal to 0.
+        
         return false;
     }
 
     // Removes the given value if it is contained in the set.
     // If the set does not contain the value, has no effect.
+    // by: Clyde
     public void remove(int value)
     {
-        // TO DO
+        // TODO:
+        // get the hashcode of the value to remove. assign it to hashCode.
+        // treating the HashEntry at elementData[hashCode] as a LinkedList:
+        // assign HashEntry cur to elementData[hashCode].
+        // assign HashEntry prev to NULL.
+        // while cur is not NULL:
+        //  if cur.data equals value:
+        //      if prev is NULL:
+        //          assign elementData[hashcode] to cur.next.
+        //      if prev is not NULL:
+        //          assign prev.next to cur.next.
+        //      decrement size and break loop.
+        //  assign prev to cur.
+        //  assign cur to cur.next.
+        //
     }
 
     // Returns the number of elements in the queue.
+    // by: Clyde
     public int size()
     {
-        // TO DO
-        return -1;
+        // TODO: return size instance variable.
+        return -69420;
     }
 
+    // Returns the preferred hash bucket index for the given value.
+    // by: Eric
+    private int hashFunction(int value)
+    {
+        // TODO: return the abs(value) modulo elementData.length.
+        return -69420;
+    }
+
+    // by: Eric
+    private double loadFactor()
+    {
+        // TODO: return size instance variable / elementData.length, but convert the divisor or dividend to double.
+        return -420.69;
+    }
+
+    // Resizes the hash table to twice its former size.
+    // by: Eric
+    private void rehash()
+    {
+        // TODO:
+        // assign HashEntry[] oldData to elementData.
+        // reinitialize elementData to a new HashArray with size 2 * oldData.length.
+        // set size to 0.
+        // then, for each HashEntry in oldData:
+        //  if the HashEntry is not null,
+        //      assign HashEntry cur to the current HashEntry.
+        //          while cur is not NULL:
+        //              call add(cur.data).
+        //              assign cur to cur.next.
+    }
+    
     // Returns a string representation of this queue, such as "[10, 20, 30]";
     // The elements are not guaranteed to be listed in sorted order.
     public String toString()
@@ -77,25 +165,6 @@ public class MyHashSet
             }
         }
         return result + "]";
-    }
-
-    // Returns the preferred hash bucket index for the given value.
-    private int hashFunction(int value)
-    {
-        // TO DO
-        return -1;
-    }
-
-    private double loadFactor()
-    {
-        // TO DO
-        return 0.0;
-    }
-
-    // Resizes the hash table to twice its former size.
-    private void rehash()
-    {
-        // TO DO
     }
 
     // Represents a single value in a chain stored in one hash bucket.
