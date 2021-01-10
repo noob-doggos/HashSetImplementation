@@ -75,39 +75,43 @@ public class MyHashSet
     // by: Clyde
     public boolean isEmpty()
     {
-        // TODO: return if size variable is equal to 0.
-        
-        return false;
+        return size == 0;
     }
 
     // Removes the given value if it is contained in the set.
     // If the set does not contain the value, has no effect.
     // by: Clyde
     public void remove(int value)
-    {
-        // TODO:
-        // get the hashcode of the value to remove. assign it to hashCode.
-        // treating the HashEntry at elementData[hashCode] as a LinkedList:
-        // assign HashEntry cur to elementData[hashCode].
-        // assign HashEntry prev to NULL.
-        // while cur is not NULL:
-        //  if cur.data equals value:
-        //      if prev is NULL:
-        //          assign elementData[hashcode] to cur.next.
-        //      if prev is not NULL:
-        //          assign prev.next to cur.next.
-        //      decrement size and break loop.
-        //  assign prev to cur.
-        //  assign cur to cur.next.
-        //
+    {        
+        int hashcode = hashfunction(value);
+        HashEntry cur = elementData[hashcode];  
+        HashEntry prev = null
+        int queueLength = 0;        
+        while(cur.data != null)
+        {            
+            if(cur.data != value)
+            {
+                queueLength++;
+                prev = cur; 
+                cur = cur.next;                  
+            } else {
+                if(prev == null)
+                {
+                    elementData[hashcode] = cur.next;
+                } else {                
+                    prev.next = cur.next;
+                }
+                size--;                                                                                
+            }
+            return queueLength;
+        }        
     }
 
     // Returns the number of elements in the queue.
     // by: Clyde
     public int size()
-    {
-        // TODO: return size instance variable.
-        return -69420;
+    {       
+        return size;
     }
 
     // Returns the preferred hash bucket index for the given value.
