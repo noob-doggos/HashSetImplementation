@@ -83,15 +83,13 @@ public class MyHashSet
     // by: Clyde
     public void remove(int value)
     {        
-        int hashcode = hashfunction(value);
+        int hashcode = hashFunction(value);
         HashEntry cur = elementData[hashcode];  
-        HashEntry prev = null
-        int queueLength = 0;        
-        while(cur.data != null)
+        HashEntry prev = null;      
+        while(cur != null)
         {            
             if(cur.data != value)
             {
-                queueLength++;
                 prev = cur; 
                 cur = cur.next;                  
             } else {
@@ -103,7 +101,6 @@ public class MyHashSet
                 }
                 size--;                                                                                
             }
-            return queueLength;
         }        
     }
 
