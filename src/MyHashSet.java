@@ -99,7 +99,8 @@ public class MyHashSet
                 } else {                
                     prev.next = cur.next;
                 }
-                size--;                                                                                
+                size--;
+                break;
             }
         }        
     }
