@@ -117,17 +117,17 @@ public class MyHashSet
     private int hashFunction(int value)
     {
         // TODO: return the abs(value) modulo elementData.length.
-        return -69420;
+        return Math.abs(value % elementData.length);
     }
 
     // by: Eric
     private double loadFactor()
     {
         // TODO: return size instance variable / elementData.length, but convert the divisor or dividend to double.
-        return -420.69;
+        return (double) this.size / elementData.length;
     }
 
-    // Resizes the hash table to twice its former size.
+    // Resizes the hash table to twice its original size/
     // by: Eric
     private void rehash()
     {
@@ -141,6 +141,23 @@ public class MyHashSet
         //          while cur is not NULL:
         //              call add(cur.data).
         //              assign cur to cur.next.
+        HashEntry[] oldData = elementData;
+
+            // formation of new table
+            elementData = new HashEntry[2 * oldData.length];
+            size = 0;
+        
+            // copying the table
+            for (HashEntry curEntry : oldData)
+            {
+                HashEntry cur = curEntry;
+                while (cur != null)
+                {
+                    add(cur.data);
+                    cur = cur.next;
+             }
+         }
+        
     }
     
     // Returns a string representation of this queue, such as "[10, 20, 30]";
